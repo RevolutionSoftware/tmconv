@@ -24,6 +24,6 @@ The optional parameter decides what to use for basename for the generated .asm a
 
 ## TODO
 
-- Parser
-- Translator
+- Parser (Read)
+- Translator (Write)
 - Design how the formated-text inputfile should be written
