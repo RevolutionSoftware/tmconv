@@ -1,8 +1,8 @@
 #include <stdio.h>
 
-#define FIRST_PRINTABLE_ASCII 0x20
-#define LAST_PRINTABLE_ASCII 0x7E
-#define PRINTABLE_ASCII(x) ((x) >= FIRST_PRINTABLE_ASCII && \
+#define FIRSTPRINTABLE 0x20
+#define LASTPRINTABLE 0x7E
+#define ISPRINTABLE(x) ((x) >= FIRST_PRINTABLE_ASCII && \
 			(x) <= LAST_PRINTABLE_ASCII \
 		? 1 \
 		: 0)
