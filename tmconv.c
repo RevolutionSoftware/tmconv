@@ -2,8 +2,8 @@
 
 #define FIRSTPRINTABLE 0x20
 #define LASTPRINTABLE 0x7E
-#define ISPRINTABLE(x) ((x) >= FIRST_PRINTABLE_ASCII && \
-			(x) <= LAST_PRINTABLE_ASCII \
+#define ISPRINTABLE(x) ((x) >= FIRSTPRINTABLE && \
+			(x) <= LASTPRINTABLE \
 		? 1 \
 		: 0)
 
