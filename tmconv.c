@@ -8,6 +8,9 @@
 		: 0)
 
 typedef unsigned char Uint8;
+typedef unsigned short Uint16;
+typedef unsigned int Uint32;
+typedef unsigned long Uint64;
 
 typedef struct {
 	char name[256];
