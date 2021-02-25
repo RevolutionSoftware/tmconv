@@ -13,15 +13,48 @@ typedef unsigned int Uint32;
 typedef unsigned long Uint64;
 
 typedef struct {
+	int unsaved;
 	char name[256];
 	Uint8 *data;
+	int col, line;
 } Document;
 
+Document doc;
+
+/* Helper Functions */
 int
 error(char *msg, const char *err)
 {
 	printf("Error %s: %s\n", msg, err);
 	return 1;
+}
+
+char *
+scpy(const char *src, char *dst, int len)
+{
+	int i = 0;
+	while((dst[i] = src[i]) && i < len - 2)
+		i++;
+	dst[i + 1] = '\0';
+	return dst;
+}
+
+int
+slen(const char *src)
+{
+	int i = 0;
+	while(src[i++] != '\0')
+		;
+	return i;
+}
+
+void
+putdb(Document *d)
+{
+	d->data[d->col++] = '.';
+	d->data[d->col++] = 'd';
+	d->data[d->col++] = 'b';
+	d->data[d->col++] = ' ';
 }
 
 int
