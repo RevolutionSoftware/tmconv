@@ -7,6 +7,11 @@
 		? 1 \
 		: 0)
 
+#define HOR 32
+#define VER 16
+#define PAD 2
+#define SZ (HOR * VER * 16)
+
 typedef unsigned char Uint8;
 typedef unsigned short Uint16;
 typedef unsigned int Uint32;
@@ -15,11 +20,11 @@ typedef unsigned long Uint64;
 typedef struct {
 	int unsaved;
 	char name[256];
-	Uint8 *data;
-	int col, line;
+	Uint8 data[SZ];
+	int col, row;
 } Document;
 
-Document doc;
+Document doc = {0};
 
 /* Helper Functions */
 int
@@ -51,10 +56,25 @@ slen(const char *src)
 void
 putdb(Document *d)
 {
-	d->data[d->col++] = '.';
-	d->data[d->col++] = 'd';
-	d->data[d->col++] = 'b';
-	d->data[d->col++] = ' ';
+	if(d->col == 0) {
+		d->data[d->col++] = '.';
+		d->data[d->col++] = 'd';
+		d->data[d->col++] = 'b';
+		d->data[d->col++] = ' ';
+	}
+}
+
+/* Init */
+void
+makedoc(Document *d, char *name)
+{
+	int i;
+	for(i = 0; i < SZ; ++i)
+		d->data[i]=0x00;
+	d->unsaved = 0;
+	d->col = 0;
+	d->row = 0;
+	scpy(name, d->name, 256);
 }
 
 int
