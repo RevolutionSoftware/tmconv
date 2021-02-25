@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+#define NPRINTABLEASCII 96
 #define FIRSTPRINTABLE 0x20
 #define LASTPRINTABLE 0x7E
 #define ISPRINTABLE(x) ((x) >= FIRSTPRINTABLE && \
@@ -19,14 +20,25 @@ typedef unsigned long Uint64;
 
 typedef struct {
 	int unsaved;
+	int num[NPRINTABLEASCII];
 	char name[256];
 	Uint8 data[SZ];
 	int col, row;
 } Document;
 
-Document doc = {0};
+Document doc;
 
 /* Helper Functions */
+
+void
+indexer(Document *d)
+{
+	int i;
+	char c;
+	for(i = 0, c = FIRSTPRINTABLE; c >= FIRSTPRINTABLE && c <= LASTPRINTABLE; ++i, ++c)
+		d->num[i] = i;
+}
+
 int
 error(char *msg, const char *err)
 {
@@ -54,27 +66,32 @@ slen(const char *src)
 }
 
 void
-putdata(Document *d)
-{
-	if(d->col == 0) {
-		d->data[d->col++] = '.';
-		d->data[d->col++] = 'd';
-		d->data[d->col++] = 'b';
-		d->data[d->col++] = ' ';
-	}
-}
-
-/* Init */
-void
 makedoc(Document *d, char *name)
 {
-	int i;
+	int i, j;
 	for(i = 0; i < SZ; ++i)
-		d->data[i]=0x00;
+		d->data[i] = 0x00;
+	for(j = 0; j < NPRINTABLEASCII; ++j)
+		d->num[j] = 0x00;
+	indexer(d);
 	d->unsaved = 0;
 	d->col = 0;
 	d->row = 0;
 	scpy(name, d->name, 256);
+}
+
+/* For debugging the indexer*/
+void
+printindex()
+{
+	int i, j;
+	char c;
+	c = FIRSTPRINTABLE;
+	i = 0;
+	for(i = 0; i < NPRINTABLEASCII - 1 && c <= LASTPRINTABLE - 1;) {
+		for(j = 0; j < 8 && i < NPRINTABLEASCII - 1 && c <= LASTPRINTABLE; ++i, ++c)
+			printf("(i[%01i], Character '%c')\n", i, c);
+	}
 }
 
 int
@@ -91,6 +108,7 @@ main(int argc, char *argv[])
 		return error("Invalid inputfile", "Cannot open file");
 
 	outnam = (argc >= 3) ? argv[2] : "output";
+	makedoc(&doc, outnam);
 
 	return 0;
 }
