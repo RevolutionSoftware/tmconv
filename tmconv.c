@@ -54,7 +54,7 @@ slen(const char *src)
 }
 
 void
-putdb(Document *d)
+putdata(Document *d)
 {
 	if(d->col == 0) {
 		d->data[d->col++] = '.';

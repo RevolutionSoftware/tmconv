@@ -24,6 +24,7 @@ The optional parameter decides what to use for basename for the generated .asm a
 
 ## TODO
 
+- Make the `putdata` function more general (Maybe the possiblity to write a string for it to put at your request)
 - Parser (Read)
 - Translator (Write)
 - Design how the formated-text inputfile should be written
