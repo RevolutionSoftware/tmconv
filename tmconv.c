@@ -20,7 +20,7 @@ typedef struct {
 Document doc;
 
 /* Character LUT */
-static const Uint8 clookup[96] = {
+static const Uint8 clookup[95] = {
 	/* clang-format off */
 	0X20, 0X21, 0X22, 0X23, 0X24, 0X25, 0X26, 0X27, 0X28, 0X29,
 	0X2A, 0X2B, 0X2C, 0X2D, 0X2E, 0X2F, 0X30, 0X31, 0X32, 0X33,
