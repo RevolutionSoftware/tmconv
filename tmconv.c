@@ -17,7 +17,7 @@ typedef unsigned long Uint64;
 
 typedef struct {
 	int unsaved;
-	int num[NPRINTABLEASCII];
+	int lut[NPRINTABLEASCII]; /* Look Up Table */
 	char name[256];
 	Uint8 data[SZ];
 	int col, row;
@@ -34,7 +34,7 @@ indexer(Document *d)
 	char c;
 	for(i = 0, c = FIRSTPRINTABLE; c >= FIRSTPRINTABLE && c <= LASTPRINTABLE;
 		++i, ++c)
-		d->num[i] = c;
+		d->lut[i] = c;
 }
 
 int
@@ -67,7 +67,7 @@ makedoc(Document *d, char *name)
 {
 	int i, j;
 	for(i = 0; i < SZ; ++i) d->data[i] = 0x00;
-	for(j = 0; j < NPRINTABLEASCII; ++j) d->num[j] = 0x00;
+	for(j = 0; j < NPRINTABLEASCII; ++j) d->lut[j] = 0x00;
 	indexer(d);
 	d->unsaved = 0;
 	d->col = 0;
@@ -86,7 +86,7 @@ printindex()
 	for(i = 0; i < NPRINTABLEASCII - 1 && c <= LASTPRINTABLE - 1;) {
 		for(j = 0; j < 8 && i < NPRINTABLEASCII - 1 && c <= LASTPRINTABLE;
 			++i, ++c)
-			printf("(i[%01i], Character '%c')\n", i, doc.num[i]);
+			printf("(i[%01i], Character '%c')\n", i, doc.lut[i]);
 	}
 }
 
