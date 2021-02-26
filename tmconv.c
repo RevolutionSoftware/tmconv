@@ -64,7 +64,7 @@ slen(const char *src)
 void
 makedoc(Document *d, char *name)
 {
-	int i, j;
+	int i;
 	for(i = 0; i < SZ; ++i) d->data[i] = 0x00;
 	d->unsaved = 0;
 	d->col = 0;
