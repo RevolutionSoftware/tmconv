@@ -3,10 +3,7 @@
 #define NPRINTABLEASCII 96
 #define FIRSTPRINTABLE 0x20
 #define LASTPRINTABLE 0x7E
-#define ISPRINTABLE(x) ((x) >= FIRSTPRINTABLE && \
-			(x) <= LASTPRINTABLE \
-		? 1 \
-		: 0)
+#define ISPRINTABLE(x) ((x) >= FIRSTPRINTABLE && (x) <= LASTPRINTABLE ? 1 : 0)
 
 #define HOR 32
 #define VER 16
@@ -35,7 +32,8 @@ indexer(Document *d)
 {
 	int i;
 	char c;
-	for(i = 0, c = FIRSTPRINTABLE; c >= FIRSTPRINTABLE && c <= LASTPRINTABLE; ++i, ++c)
+	for(i = 0, c = FIRSTPRINTABLE; c >= FIRSTPRINTABLE && c <= LASTPRINTABLE;
+		++i, ++c)
 		d->num[i] = i;
 }
 
@@ -50,8 +48,7 @@ char *
 scpy(const char *src, char *dst, int len)
 {
 	int i = 0;
-	while((dst[i] = src[i]) && i < len - 2)
-		i++;
+	while((dst[i] = src[i]) && i < len - 2) i++;
 	dst[i + 1] = '\0';
 	return dst;
 }
@@ -69,10 +66,8 @@ void
 makedoc(Document *d, char *name)
 {
 	int i, j;
-	for(i = 0; i < SZ; ++i)
-		d->data[i] = 0x00;
-	for(j = 0; j < NPRINTABLEASCII; ++j)
-		d->num[j] = 0x00;
+	for(i = 0; i < SZ; ++i) d->data[i] = 0x00;
+	for(j = 0; j < NPRINTABLEASCII; ++j) d->num[j] = 0x00;
 	indexer(d);
 	d->unsaved = 0;
 	d->col = 0;
@@ -80,7 +75,7 @@ makedoc(Document *d, char *name)
 	scpy(name, d->name, 256);
 }
 
-/* For debugging the indexer*/
+/* For debugging the indexer */
 void
 printindex()
 {
@@ -89,7 +84,8 @@ printindex()
 	c = FIRSTPRINTABLE;
 	i = 0;
 	for(i = 0; i < NPRINTABLEASCII - 1 && c <= LASTPRINTABLE - 1;) {
-		for(j = 0; j < 8 && i < NPRINTABLEASCII - 1 && c <= LASTPRINTABLE; ++i, ++c)
+		for(j = 0; j < 8 && i < NPRINTABLEASCII - 1 && c <= LASTPRINTABLE;
+			++i, ++c)
 			printf("(i[%01i], Character '%c')\n", i, c);
 	}
 }
@@ -101,7 +97,8 @@ main(int argc, char *argv[])
 	char *outnam; /* Base for output-filename */
 
 	if(argc < 2) {
-		printf("Usage: %s formated.txt [optional: base for outputnames]\n", argv[0]);
+		printf("Usage: %s formated.txt [optional: base for outputnames]\n",
+			argv[0]);
 		return 0;
 	}
 	if(!(fp = fopen(argv[1], "r")))
