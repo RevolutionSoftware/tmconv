@@ -34,7 +34,7 @@ indexer(Document *d)
 	char c;
 	for(i = 0, c = FIRSTPRINTABLE; c >= FIRSTPRINTABLE && c <= LASTPRINTABLE;
 		++i, ++c)
-		d->num[i] = i;
+		d->num[i] = c;
 }
 
 int
@@ -86,7 +86,7 @@ printindex()
 	for(i = 0; i < NPRINTABLEASCII - 1 && c <= LASTPRINTABLE - 1;) {
 		for(j = 0; j < 8 && i < NPRINTABLEASCII - 1 && c <= LASTPRINTABLE;
 			++i, ++c)
-			printf("(i[%01i], Character '%c')\n", i, c);
+			printf("(i[%01i], Character '%c')\n", i, doc.num[i]);
 	}
 }
 
