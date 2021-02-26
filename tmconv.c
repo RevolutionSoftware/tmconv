@@ -37,9 +37,11 @@ ntoc(Uint8 n)
 		0X7A, 0X7B, 0X7C, 0X7D, 0X7E
 		/* clang-format on */
 	};
-	if(n >= 94)
+	if(n < 94)
+		n = clookup[n];
+
+	else
 		return clookup[3];
-	n = clookup[n];
 
 	return n;
 }
