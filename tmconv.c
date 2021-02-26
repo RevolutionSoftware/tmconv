@@ -26,9 +26,8 @@ typedef struct {
 Document doc;
 
 /* Helper Functions */
-
 void
-indexer(Document *d)
+genindex(Document *d) /* Deprecating and removing in a bit */
 {
 	int i;
 	char c;
@@ -68,26 +67,25 @@ makedoc(Document *d, char *name)
 	int i, j;
 	for(i = 0; i < SZ; ++i) d->data[i] = 0x00;
 	for(j = 0; j < NPRINTABLEASCII; ++j) d->lut[j] = 0x00;
-	indexer(d);
+	genindex(d);
 	d->unsaved = 0;
 	d->col = 0;
 	d->row = 0;
 	scpy(name, d->name, 256);
 }
 
-/* For debugging the indexer */
+/* For debugging the genindex (which will be depracated/removed in a bit) */
 void
 printindex()
 {
-	int i, j;
+	int i;
 	char c;
 	c = FIRSTPRINTABLE;
 	i = 0;
-	for(i = 0; i < NPRINTABLEASCII - 1 && c <= LASTPRINTABLE - 1;) {
-		for(j = 0; j < 8 && i < NPRINTABLEASCII - 1 && c <= LASTPRINTABLE;
+	for(i = 0; i < NPRINTABLEASCII - 1 && c <= LASTPRINTABLE - 1;)
+		for(; i < NPRINTABLEASCII - 1 && c <= LASTPRINTABLE;
 			++i, ++c)
 			printf("(i[%01i], Character '%c')\n", i, doc.lut[i]);
-	}
 }
 
 int
