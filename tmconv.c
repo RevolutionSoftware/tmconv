@@ -18,7 +18,6 @@ typedef struct {
 	int unsaved;
 	char name[256];
 	Uint8 data[SZ];
-	int col, row;
 } Document;
 
 Document doc;
@@ -55,8 +54,6 @@ makedoc(Document *d, char *name)
 	int i;
 	for(i = 0; i < SZ; ++i) d->data[i] = 0x00;
 	d->unsaved = 0;
-	d->col = 0;
-	d->row = 0;
 	scpy(name, d->name, 256);
 }
 
