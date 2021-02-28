@@ -20,6 +20,11 @@ typedef struct {
 	Uint8 data[SZ];
 } Document;
 
+typedef struct {
+	char ascii;
+	char png[256];
+} Tile;
+
 Document doc;
 
 /* Helper Functions */
