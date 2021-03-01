@@ -24,7 +24,6 @@ The optional parameter decides what to use for basename for the generated .asm a
 
 ## TODO
 
-- Make the `putdata` function more general (Maybe the possiblity to write a string for it to put at your request)
 - Apparently, using argv[x] directly (see main) may be somewhat of a safety issue, fix.
 - Parser (Read)
 - Translator (Write)
