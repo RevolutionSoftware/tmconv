@@ -78,6 +78,7 @@ main(int argc, char *argv[])
 
 	outnam = (argc >= 3) ? argv[2] : "output";
 	makedoc(&doc, outnam);
+	fclose(fp);
 
 	return 0;
 }
